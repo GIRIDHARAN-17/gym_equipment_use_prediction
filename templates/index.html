@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Equipment Usage Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏋️ Gym Equipment Usage Prediction</h1>
+            <p>Predict crowd levels for gym equipment</p>
+        </div>
+
+        <div class="prediction-card">
+            <h2>Enter Workout Details</h2>
+
+            <form id="predictionForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="machine_name">Machine Name *</label>
+                        <select id="machine_name" name="machine_name" required>
+                            <option value="">Select machine</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="workout_day">Workout Day *</label>
+                        <select id="workout_day" name="workout_day" required>
+                            <option value="">Select day</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="workout_plan">Workout Plan *</label>
+                        <select id="workout_plan" name="workout_plan" required>
+                            <option value="">Select workout plan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="muscle_group">Muscle Group *</label>
+                        <select id="muscle_group" name="muscle_group" required>
+                            <option value="">Select muscle group</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="start_hour">Start Hour (0-23) *</label>
+                        <input type="number" id="start_hour" name="start_hour" min="0" max="23" value="12" required>
+                        <small>0 = Midnight, 12 = Noon, 18 = 6 PM</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration_min">Duration (minutes) *</label>
+                        <input type="number" id="duration_min" name="duration_min" min="1" max="300" value="30"
+                            required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="predictBtn">
+                    <span id="btnText">Get Prediction</span>
+                    <span id="btnLoader" class="loader" style="display: none;"></span>
+                </button>
+            </form>
+
+            <div id="result" class="result-box" style="display: none;">
+                <h3>Prediction Result</h3>
+                <div class="result-content">
+                    <div class="result-item">
+                        <span class="label">Crowd Level:</span>
+                        <span id="crowdLevel" class="crowd-level"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Suggestion:</span>
+                        <span id="suggestion" class="suggestion-text"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="error" class="error-box" style="display: none;">
+                <h3>Error</h3>
+                <p id="errorMessage"></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Powered by Giridharan | machine Learning Engineer</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
